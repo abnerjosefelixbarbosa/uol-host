@@ -1,2 +1,3 @@
 # uol-host-back-end
-back end da explicação.
+
+back end da aplicação.
