@@ -10,7 +10,8 @@ import com.org.oul_host_back_end_java.services.interfaces.IPlayerService;
 public class PlayerService implements IPlayerService {
 
 	public PlayerResponse registerPlayer(PlayerRequest request) {
-		// TODO Auto-generated method stub
+        
+		
 		return null;
 	}
 }

@@ -4,6 +4,7 @@ import com.org.oul_host_back_end_java.enums.PlayerType;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -19,9 +20,11 @@ public class PlayerRequest {
 	private String name;
 	@NotEmpty
 	@NotNull
+	@Email
 	private String email;
-	@NotEmpty
+	@NotNull
 	private String telephone;
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private PlayerType playerType;
 }

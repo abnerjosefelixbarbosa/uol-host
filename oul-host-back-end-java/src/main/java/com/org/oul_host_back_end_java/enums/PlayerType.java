@@ -1,9 +1,9 @@
 package com.org.oul_host_back_end_java.enums;
 
 public enum PlayerType {
-	Avengers("Avengers",
+    AVENGERS("AVENGERS",
 			"https://raw.githubusercontent.com/uolhost/test-backEnd-Java/master/referencias/vingadores.json"),
-	JusticeLeague("Avengers",
+	JUSTICE_LEAGUE("JUSTICE_LEAGUE",
 			"https://raw.githubusercontent.com/uolhost/test-backEnd-Java/master/referencias/liga_da_justica.xml");
 	
 	private String type;
