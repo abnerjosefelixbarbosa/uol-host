@@ -7,12 +7,12 @@ public enum PlayerType {
 			"https://raw.githubusercontent.com/uolhost/test-backEnd-Java/master/referencias/liga_da_justica.xml");
 	
 	private String type;
-	private String url;
+	private String uri;
 	
 	private PlayerType(String type,
-			String url) {
+			String uri) {
 		this.type = type;
-		this.url = url;
+		this.uri = uri;
 	}
 
 
@@ -26,12 +26,12 @@ public enum PlayerType {
 	}
 
 
-	public String getUrl() {
-		return url;
+	public String getUri() {
+		return uri;
 	}
 
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setUri(String uri) {
+		this.uri = uri;
 	}
 }
