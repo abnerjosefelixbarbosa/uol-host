@@ -15,4 +15,5 @@ public class Player {
 	private String email;
 	private String telephone;
 	private PlayerType playerType;
+	private String codename;
 }
