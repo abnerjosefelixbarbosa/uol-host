@@ -2,7 +2,6 @@ package com.org.oul_host_back_end_java.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -16,14 +15,13 @@ import com.org.oul_host_back_end_java.dtos.PlayerCodenameJusticeLeagueResponse;
 import com.org.oul_host_back_end_java.dtos.PlayerJusticeLeagueResponse;
 import com.org.oul_host_back_end_java.entities.Player;
 import com.org.oul_host_back_end_java.enums.PlayerType;
-import com.org.oul_host_back_end_java.repositories.interfaces.IPlayerRepository;
 import com.org.oul_host_back_end_java.services.interfaces.ICodenameService;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CodenameService implements ICodenameService {
-	@Autowired
-	private IPlayerRepository playerRepository;
-	
 	public Player getCodeName(Player player) {	
 		PlayerAvengersResponse avengersResponse = getAvengers();
 		
@@ -34,36 +32,19 @@ public class CodenameService implements ICodenameService {
 		
 		List<PlayerCodenameJusticeLeagueResponse> justiceLeagueList = justiceLeagueResponse
 				.getCodenames();
-		
-		//System.out.println(playerJusticeLeagueResponse);
 			
 		if (player.getPlayerType().getType() == "AVENGERS") {
-		
-			/*
-			for (PlayerCodenameAvengersResponse i : avengersList) {
-				if (i.getCodename() != player.getCodename() || player.getCodename().isEmpty() || player.getCodename() == null) {
-					player.setCodename(avengersList.stream().findFirst().get().getCodename());
-				}
-			}
-			*/
+			PlayerCodenameAvengersResponse codename = avengersList.stream().findFirst()
+					.orElseThrow(() -> new EntityNotFoundException("codename not found"));
 			
-			avengersList
-			.stream()
-			.forEach((i) -> {
-
-				Player selectPlayerByCodename = playerRepository.selectPlayerByCodename(player);
-				
-				if (selectPlayerByCodename == null) {
-					
-				}
-				
-				//if (a.getCodename())
-			});
-	
-			player.setCodename(avengersList.stream().findFirst().get().getCodename());
+			avengersList.remove(codename);
+			
+			player.setCodename(codename.getCodename());
 		} else {
+			PlayerCodenameJusticeLeagueResponse codename = justiceLeagueList.stream().findFirst()
+					.orElseThrow(() -> new EntityNotFoundException("codename not found"));
 			
-			
+			justiceLeagueList.remove(codename);
 			
 			player.setCodename(justiceLeagueList.stream().findFirst().get().getCodename());
 		}
@@ -71,6 +52,7 @@ public class CodenameService implements ICodenameService {
 		return player;
 	}
 	
+	@PostConstruct
 	private PlayerAvengersResponse getAvengers() {	
 		try {
 			WebClient webClient = WebClient.builder()
@@ -94,6 +76,7 @@ public class CodenameService implements ICodenameService {
 		}
 	}
 	
+	@PostConstruct
     private PlayerJusticeLeagueResponse getJusticeLeague() {
     	
     	try {
