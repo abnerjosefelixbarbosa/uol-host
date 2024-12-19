@@ -4,5 +4,6 @@ name VARCHAR(50) NOT NULL,
 email VARCHAR(30) NOT NULL,
 telephone VARCHAR(20) NULL,
 player_type INT NOT NULL,
-CONSTRAINT player_primary_key PRIMARY KEY (id)
+codename VARCHAR(50) NOT NULL,
+CONSTRAINT player_pk PRIMARY KEY (id)
 );

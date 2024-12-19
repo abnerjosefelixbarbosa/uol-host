@@ -24,10 +24,10 @@ public class PlayerService implements IPlayerService {
         BeanUtils.copyProperties(request, player);
         
         codenameService.getCodeName(player);
-        
-        //player = codeNameService.getCodeName(player);
 		
 		player = playerRepository.insertPlayer(player);
+		
+		//playerRepository.selectPlayerByCodename(player);
 	
 		PlayerResponse response = new PlayerResponse();
 		
