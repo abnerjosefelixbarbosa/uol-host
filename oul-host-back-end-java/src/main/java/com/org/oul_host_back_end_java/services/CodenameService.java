@@ -1,7 +1,9 @@
 package com.org.oul_host_back_end_java.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -22,19 +24,16 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CodenameService implements ICodenameService {
+	@Autowired
+	private ObjectMapper objectMapper;
+	private List<PlayerCodenameAvengersResponse> avengersList = new ArrayList<PlayerCodenameAvengersResponse>();
+	private List<PlayerCodenameJusticeLeagueResponse> justiceLeagueList = new ArrayList<PlayerCodenameJusticeLeagueResponse>();;
+	
 	public Player getCodeName(Player player) {	
-		PlayerAvengersResponse avengersResponse = getAvengers();
 		
-		PlayerJusticeLeagueResponse justiceLeagueResponse = getJusticeLeague();
-		
-		List<PlayerCodenameAvengersResponse> avengersList = avengersResponse
-				.getAvengers();
-		
-		List<PlayerCodenameJusticeLeagueResponse> justiceLeagueList = justiceLeagueResponse
-				.getCodenames();
 			
 		if (player.getPlayerType().getType() == "AVENGERS") {
-			PlayerCodenameAvengersResponse codename = avengersList.stream().findFirst()
+			PlayerCodenameAvengersResponse codename = avengersList.parallelStream().findFirst()
 					.orElseThrow(() -> new EntityNotFoundException("codename not found"));
 			
 			avengersList.remove(codename);
@@ -53,7 +52,7 @@ public class CodenameService implements ICodenameService {
 	}
 	
 	@PostConstruct
-	private PlayerAvengersResponse getAvengers() {	
+	private void loadAvengers() {	
 		try {
 			WebClient webClient = WebClient.builder()
 					.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -66,19 +65,16 @@ public class CodenameService implements ICodenameService {
 			        .bodyToMono(String.class)
 			        .block();
 			
-			ObjectMapper objectMapper = new ObjectMapper();
-			
 			PlayerAvengersResponse playerAvengersResponse = objectMapper.readValue(response, PlayerAvengersResponse.class);
 			
-			return playerAvengersResponse;
+			avengersList = playerAvengersResponse.getAvengers();
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
 	
 	@PostConstruct
-    private PlayerJusticeLeagueResponse getJusticeLeague() {
-    	
+    private void loadJusticeLeague() {
     	try {
     		WebClient webClient = WebClient.builder()
     				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_XML_VALUE)
@@ -95,7 +91,7 @@ public class CodenameService implements ICodenameService {
     		
     		PlayerJusticeLeagueResponse playerJusticeLeagueResponse = xmlMapper.readValue(response, PlayerJusticeLeagueResponse.class);
     		
-    		return playerJusticeLeagueResponse;
+    		justiceLeagueList = playerJusticeLeagueResponse.getCodenames();
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}

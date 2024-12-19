@@ -1,5 +1,7 @@
 package com.org.oul_host_back_end_java.services;
 
+
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,12 @@ public class PlayerService implements IPlayerService {
         Player player = new Player();
    
         BeanUtils.copyProperties(request, player);
+        
+        boolean isExists =  playerRepository.existsPlayerByCodename(player);
+        
+        if (isExists) {
+        	throw new RuntimeException();
+        }
         
         codenameService.getCodeName(player);
 		
