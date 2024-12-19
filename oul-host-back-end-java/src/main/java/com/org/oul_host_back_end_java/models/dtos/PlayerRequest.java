@@ -1,6 +1,6 @@
-package com.org.oul_host_back_end_java.dtos;
+package com.org.oul_host_back_end_java.models.dtos;
 
-import com.org.oul_host_back_end_java.enums.PlayerType;
+import com.org.oul_host_back_end_java.models.enums.PlayerType;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

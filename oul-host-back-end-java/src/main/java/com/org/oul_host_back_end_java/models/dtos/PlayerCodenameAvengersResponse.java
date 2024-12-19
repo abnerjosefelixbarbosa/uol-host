@@ -1,4 +1,4 @@
-package com.org.oul_host_back_end_java.dtos;
+package com.org.oul_host_back_end_java.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

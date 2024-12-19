@@ -1,4 +1,4 @@
-package com.org.oul_host_back_end_java.services;
+package com.org.oul_host_back_end_java.models.services;
 
 
 
@@ -6,12 +6,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.org.oul_host_back_end_java.dtos.PlayerRequest;
-import com.org.oul_host_back_end_java.dtos.PlayerResponse;
-import com.org.oul_host_back_end_java.entities.Player;
-import com.org.oul_host_back_end_java.repositories.interfaces.IPlayerRepository;
-import com.org.oul_host_back_end_java.services.interfaces.ICodenameService;
-import com.org.oul_host_back_end_java.services.interfaces.IPlayerService;
+import com.org.oul_host_back_end_java.models.dtos.PlayerRequest;
+import com.org.oul_host_back_end_java.models.dtos.PlayerResponse;
+import com.org.oul_host_back_end_java.models.entities.Player;
+import com.org.oul_host_back_end_java.models.repositories.interfaces.IPlayerRepository;
+import com.org.oul_host_back_end_java.models.services.interfaces.ICodenameService;
+import com.org.oul_host_back_end_java.models.services.interfaces.IPlayerService;
 
 @Service
 public class PlayerService implements IPlayerService {
@@ -25,17 +25,15 @@ public class PlayerService implements IPlayerService {
    
         BeanUtils.copyProperties(request, player);
         
-        boolean isExists =  playerRepository.existsPlayerByCodename(player);
+        boolean isExists = playerRepository.existsPlayerByNameOrEmail(player);
         
         if (isExists) {
-        	throw new RuntimeException();
+        	throw new RuntimeException("player exists");
         }
         
         codenameService.getCodeName(player);
 		
 		player = playerRepository.insertPlayer(player);
-		
-		//playerRepository.selectPlayerByCodename(player);
 	
 		PlayerResponse response = new PlayerResponse();
 		

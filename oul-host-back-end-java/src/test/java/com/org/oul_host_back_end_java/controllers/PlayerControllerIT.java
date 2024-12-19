@@ -15,8 +15,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.org.oul_host_back_end_java.dtos.PlayerRequest;
-import com.org.oul_host_back_end_java.enums.PlayerType;
+import com.github.f4b6a3.ulid.UlidCreator;
+import com.org.oul_host_back_end_java.models.dtos.PlayerRequest;
+import com.org.oul_host_back_end_java.models.entities.Player;
+import com.org.oul_host_back_end_java.models.enums.PlayerType;
+import com.org.oul_host_back_end_java.models.repositories.interfaces.IPlayerRepository;
 
 @SpringBootTest
 @ActiveProfiles("dev")
@@ -26,20 +29,26 @@ class PlayerControllerIT {
 	private MockMvc mockMvc;
 	@Autowired
 	private ObjectMapper objectMapper;
+	@Autowired
+	private IPlayerRepository playerRepository;
 
 	@BeforeEach
 	void setUp() throws Exception {
+		playerRepository.deleteAllPlayers();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
+		playerRepository.deleteAllPlayers();
 	}
 
 	@Test
 	void registerPlayer() throws Exception {
+		loadPlayer();
+		
 		PlayerRequest request = new PlayerRequest();
-		request.setName("name1");
-		request.setEmail("email1@gmail.com");
+		request.setName("name3");
+		request.setEmail("email3@gmail.com");
 		request.setPlayerType(PlayerType.AVENGERS);
 		request.setTelephone("");
 		
@@ -51,5 +60,27 @@ class PlayerControllerIT {
 				.content(obj))
 		.andExpect(MockMvcResultMatchers.status().isCreated())
 				.andDo(print());
+	}
+	
+	void loadPlayer() throws Exception  {
+		Player player1 = new Player();
+		player1.setId(UlidCreator.getUlid().toString());
+		player1.setCodename("codename1");
+		player1.setName("name1");
+		player1.setEmail("email1@gmail.com");
+		player1.setPlayerType(PlayerType.AVENGERS);
+		player1.setTelephone("");
+		
+		playerRepository.insertPlayer(player1);
+		
+		Player player2 = new Player();
+		player2.setId(UlidCreator.getUlid().toString());
+		player2.setCodename("codename2");
+		player2.setName("name2");
+		player2.setEmail("email2@gmail.com");
+		player2.setPlayerType(PlayerType.AVENGERS);
+		player2.setTelephone("");
+		
+		playerRepository.insertPlayer(player2);
 	}
 }

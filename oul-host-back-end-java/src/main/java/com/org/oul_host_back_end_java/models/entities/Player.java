@@ -1,6 +1,6 @@
-package com.org.oul_host_back_end_java.entities;
+package com.org.oul_host_back_end_java.models.entities;
 
-import com.org.oul_host_back_end_java.enums.PlayerType;
+import com.org.oul_host_back_end_java.models.enums.PlayerType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.org.oul_host_back_end_java.services;
+package com.org.oul_host_back_end_java.models.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.org.oul_host_back_end_java.dtos.PlayerAvengersResponse;
-import com.org.oul_host_back_end_java.dtos.PlayerCodenameAvengersResponse;
-import com.org.oul_host_back_end_java.dtos.PlayerCodenameJusticeLeagueResponse;
-import com.org.oul_host_back_end_java.dtos.PlayerJusticeLeagueResponse;
-import com.org.oul_host_back_end_java.entities.Player;
-import com.org.oul_host_back_end_java.enums.PlayerType;
-import com.org.oul_host_back_end_java.services.interfaces.ICodenameService;
+import com.org.oul_host_back_end_java.models.dtos.PlayerAvengersResponse;
+import com.org.oul_host_back_end_java.models.dtos.PlayerCodenameAvengersResponse;
+import com.org.oul_host_back_end_java.models.dtos.PlayerCodenameJusticeLeagueResponse;
+import com.org.oul_host_back_end_java.models.dtos.PlayerJusticeLeagueResponse;
+import com.org.oul_host_back_end_java.models.entities.Player;
+import com.org.oul_host_back_end_java.models.enums.PlayerType;
+import com.org.oul_host_back_end_java.models.services.interfaces.ICodenameService;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityNotFoundException;

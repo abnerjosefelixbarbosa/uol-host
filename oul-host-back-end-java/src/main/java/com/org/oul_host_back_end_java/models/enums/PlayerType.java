@@ -1,4 +1,4 @@
-package com.org.oul_host_back_end_java.enums;
+package com.org.oul_host_back_end_java.models.enums;
 
 public enum PlayerType {
     AVENGERS("AVENGERS",
