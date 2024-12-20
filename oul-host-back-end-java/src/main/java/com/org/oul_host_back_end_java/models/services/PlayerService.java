@@ -2,13 +2,15 @@ package com.org.oul_host_back_end_java.models.services;
 
 
 
-import org.springframework.beans.BeanUtils;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.org.oul_host_back_end_java.models.dtos.PlayerRequest;
 import com.org.oul_host_back_end_java.models.dtos.PlayerResponse;
 import com.org.oul_host_back_end_java.models.entities.Player;
+import com.org.oul_host_back_end_java.models.mappers.PlayerMapper;
 import com.org.oul_host_back_end_java.models.repositories.interfaces.IPlayerRepository;
 import com.org.oul_host_back_end_java.models.services.interfaces.ICodenameService;
 import com.org.oul_host_back_end_java.models.services.interfaces.IPlayerService;
@@ -19,11 +21,13 @@ public class PlayerService implements IPlayerService {
 	private IPlayerRepository playerRepository;
 	@Autowired
 	private ICodenameService codenameService;
+	@Autowired
+	private PlayerMapper playerMapper;
 
 	public PlayerResponse registerPlayer(PlayerRequest request) {
         Player player = new Player();
-   
-        BeanUtils.copyProperties(request, player);
+        
+        player = playerMapper.toPlayer(request);
         
         boolean isExists = playerRepository.existsPlayerByNameOrEmail(player);
         
@@ -35,10 +39,16 @@ public class PlayerService implements IPlayerService {
 		
 		player = playerRepository.insertPlayer(player);
 	
-		PlayerResponse response = new PlayerResponse();
-		
-		BeanUtils.copyProperties(player, response);
+		PlayerResponse response = playerMapper.toPlayerResponse(player);
 		
 		return response;
+	}
+
+	public List<PlayerResponse> listPlayer() {
+		return playerRepository
+				.findAllPlayers()
+				.stream()
+				.map(playerMapper::toPlayerResponse)
+				.toList();
 	}
 }

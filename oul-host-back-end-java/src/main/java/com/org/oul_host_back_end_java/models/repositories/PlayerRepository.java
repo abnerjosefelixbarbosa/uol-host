@@ -1,12 +1,15 @@
 package com.org.oul_host_back_end_java.models.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.github.f4b6a3.ulid.UlidCreator;
 import com.org.oul_host_back_end_java.models.entities.Player;
+import com.org.oul_host_back_end_java.models.mappers.PlayerMapper;
+import com.org.oul_host_back_end_java.models.mappers.interfaces.IPlayerMapper;
 import com.org.oul_host_back_end_java.models.repositories.interfaces.IPlayerRepository;
 
 import jakarta.persistence.EntityManager;
@@ -18,6 +21,8 @@ import jakarta.transaction.Transactional;
 public class PlayerRepository implements IPlayerRepository {
 	@PersistenceContext
 	private EntityManager entityManager;
+	@Autowired
+	private IPlayerMapper playerMapper;
 
 	@Transactional
 	public Player insertPlayer(Player player) {
@@ -56,7 +61,8 @@ public class PlayerRepository implements IPlayerRepository {
 		
 		query.setParameter("email", player.getEmail());
 		
-		List<Object> objects = query.getResultList();
+		List<Object> objects = query
+				.getResultList();
 		
 		if (!objects.isEmpty()) {
 			return true;
@@ -74,27 +80,16 @@ public class PlayerRepository implements IPlayerRepository {
 		query.executeUpdate();
 	}
 
-	@Override
 	public List<Player> findAllPlayers() {
-		//List<Player> players = new ArrayList<Player>();
+		String sql = "SELECT * FROM players";
 		
-		String sql = "SELECT * FROM players AS player";
+		Query query = entityManager.createNativeQuery(sql);
 		
-		Query query = entityManager.createNativeQuery(sql, "Player");
-		
-		List<Player> players = query.getResultList();
-		
-		/*
-		if (!objects.isEmpty()) {
-			
-			for (int i = 0; i < objects.size(); i++) {
-				
-				
-				//array_type array_element = array[i];
-			}
-			
-		}
-		*/
+		List<Player> players = (List<Player>) query
+				.getResultList()
+				.stream()
+				.map(playerMapper::toPlayer)
+				.collect(Collectors.toList());
 		
 		return players;
 	}

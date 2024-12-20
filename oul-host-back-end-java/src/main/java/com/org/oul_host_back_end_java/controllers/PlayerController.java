@@ -1,5 +1,7 @@
 package com.org.oul_host_back_end_java.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +27,15 @@ public class PlayerController {
 	public ResponseEntity<PlayerResponse> registerPlayer(@Valid @RequestBody PlayerRequest request) {
 		PlayerResponse response = playerService.registerPlayer(request);
 		
+		//System.out.println(response.getPlayerType().toString());
+		
 		return ResponseEntity.status(201).body(response);
 	}
 	
 	@GetMapping("/list-player")
-	public ResponseEntity<PlayerResponse> listPlayer() {
-		//PlayerResponse response = playerService.registerPlayer(request);
+	public ResponseEntity<List<PlayerResponse>> listPlayer() {
+		List<PlayerResponse> responses = playerService.listPlayer();
 		
-		return ResponseEntity.status(201).body(null);
+		return ResponseEntity.status(201).body(responses);
 	}
 }
