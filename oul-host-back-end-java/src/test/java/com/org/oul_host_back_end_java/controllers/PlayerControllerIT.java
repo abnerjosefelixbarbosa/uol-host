@@ -48,7 +48,7 @@ class PlayerControllerIT {
 		loadPlayer();
 		
 		PlayerRequest request = new PlayerRequest();
-		request.setName("name3");
+		request.setName("name2");
 		request.setEmail("email3@gmail.com");
 		request.setPlayerType(PlayerType.AVENGERS);
 		request.setTelephone("");

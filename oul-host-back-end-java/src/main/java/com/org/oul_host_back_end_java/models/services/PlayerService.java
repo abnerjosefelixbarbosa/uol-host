@@ -14,6 +14,7 @@ import com.org.oul_host_back_end_java.models.mappers.PlayerMapper;
 import com.org.oul_host_back_end_java.models.repositories.interfaces.IPlayerRepository;
 import com.org.oul_host_back_end_java.models.services.interfaces.ICodenameService;
 import com.org.oul_host_back_end_java.models.services.interfaces.IPlayerService;
+import com.org.oul_host_back_end_java.models.validations.interfaces.IPlayerValidation;
 
 @Service
 public class PlayerService implements IPlayerService {
@@ -23,17 +24,15 @@ public class PlayerService implements IPlayerService {
 	private ICodenameService codenameService;
 	@Autowired
 	private PlayerMapper playerMapper;
+	@Autowired
+	private IPlayerValidation playerValidation; 
 
 	public PlayerResponse registerPlayer(PlayerRequest request) {
         Player player = new Player();
         
         player = playerMapper.toPlayer(request);
         
-        boolean isExists = playerRepository.existsPlayerByNameOrEmail(player);
-        
-        if (isExists) {
-        	throw new RuntimeException("player exists");
-        }
+        playerValidation.playerValidation(player);
         
         codenameService.getCodeName(player);
 		
