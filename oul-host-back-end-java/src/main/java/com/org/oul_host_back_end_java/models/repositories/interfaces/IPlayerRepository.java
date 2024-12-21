@@ -1,7 +1,5 @@
 package com.org.oul_host_back_end_java.models.repositories.interfaces;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
