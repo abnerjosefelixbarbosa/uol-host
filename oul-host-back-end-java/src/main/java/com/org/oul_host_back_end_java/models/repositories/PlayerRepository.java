@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.github.f4b6a3.ulid.UlidCreator;
 import com.org.oul_host_back_end_java.models.entities.Player;
-import com.org.oul_host_back_end_java.models.mappers.PlayerMapper;
 import com.org.oul_host_back_end_java.models.mappers.interfaces.IPlayerMapper;
 import com.org.oul_host_back_end_java.models.repositories.interfaces.IPlayerRepository;
 
@@ -80,7 +82,7 @@ public class PlayerRepository implements IPlayerRepository {
 		query.executeUpdate();
 	}
 
-	public List<Player> findAllPlayers() {
+	public Page<Player> findAllPlayers(Pageable pageable) {
 		String sql = "SELECT * FROM players";
 		
 		Query query = entityManager.createNativeQuery(sql);
@@ -91,6 +93,16 @@ public class PlayerRepository implements IPlayerRepository {
 				.map(playerMapper::toPlayer)
 				.collect(Collectors.toList());
 		
-		return players;
+		int start = (int) pageable.getOffset();
+		
+        int end = Math.min((start + pageable.getPageSize()), players.size());
+		
+        if (start > players.size()) {
+            return new PageImpl<>(List.of(), pageable, players.size());
+        }
+        
+        List<Player> subList = players.subList(start, end);
+        
+		return new PageImpl<Player>(subList, pageable, players.size());
 	}
 }

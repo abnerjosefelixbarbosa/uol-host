@@ -1,5 +1,6 @@
 package com.org.oul_host_back_end_java.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -59,6 +60,18 @@ class PlayerControllerIT {
 				.accept(MediaType.APPLICATION_JSON)
 				.content(obj))
 		.andExpect(MockMvcResultMatchers.status().isCreated())
+				.andDo(print());
+	}
+	
+	@Test
+	void listPlayer() throws Exception {
+		loadPlayer();
+
+		mockMvc.perform(get("/api/players/list-player")
+				.queryParam("page", "0")
+				.queryParam("size", "2")
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(MockMvcResultMatchers.status().isOk())
 				.andDo(print());
 	}
 	

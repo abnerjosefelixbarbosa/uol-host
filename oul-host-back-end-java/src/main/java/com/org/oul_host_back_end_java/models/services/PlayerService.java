@@ -2,9 +2,9 @@ package com.org.oul_host_back_end_java.models.services;
 
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.org.oul_host_back_end_java.models.dtos.PlayerRequest;
@@ -38,17 +38,13 @@ public class PlayerService implements IPlayerService {
         codenameService.getCodeName(player);
 		
 		player = playerRepository.insertPlayer(player);
-	
-		PlayerResponse response = playerMapper.toPlayerResponse(player);
 		
-		return response;
+		return playerMapper.toPlayerResponse(player);
 	}
 
-	public List<PlayerResponse> listPlayer() {
+	public Page<PlayerResponse> listPlayer(Pageable pageable) {
 		return playerRepository
-				.findAllPlayers()
-				.stream()
-				.map(playerMapper::toPlayerResponse)
-				.toList();
+				.findAllPlayers(pageable)
+				.map(playerMapper::toPlayerResponse);
 	}
 }

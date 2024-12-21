@@ -1,8 +1,8 @@
 package com.org.oul_host_back_end_java.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,17 +25,15 @@ public class PlayerController {
 	
 	@PostMapping("/register-player")
 	public ResponseEntity<PlayerResponse> registerPlayer(@Valid @RequestBody PlayerRequest request) {
-		PlayerResponse response = playerService.registerPlayer(request);
-		
-		//System.out.println(response.getPlayerType().toString());
-		
-		return ResponseEntity.status(201).body(response);
+		return ResponseEntity
+				.status(201)
+				.body(playerService.registerPlayer(request));
 	}
 	
 	@GetMapping("/list-player")
-	public ResponseEntity<List<PlayerResponse>> listPlayer() {
-		List<PlayerResponse> responses = playerService.listPlayer();
-		
-		return ResponseEntity.status(201).body(responses);
+	public ResponseEntity<Page<PlayerResponse>> listPlayer(Pageable pageable) {	
+		return ResponseEntity
+				.status(200)
+				.body(playerService.listPlayer(pageable));
 	}
 }
