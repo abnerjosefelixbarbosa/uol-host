@@ -4,13 +4,13 @@
 
 Full stack da aplicação uol host  
 
-## modelo
+## Modelo
 
-# Recurso do projeto 
+![uol-host-diagram-class drawio](https://github.com/user-attachments/assets/004feb85-63bb-4037-9d57-258d63975aa5)
 
-## Frontend angular
+# Recurso Do Projeto 
 
-## Backend java
+## UOL Host Back End Java
 
 - Java 17.
 - Spring Boot.
@@ -19,12 +19,19 @@ Full stack da aplicação uol host
 - Swegger.
 - H2 SQL.
 - JUnit 5.
+- [API da liga da justiça](https://raw.githubusercontent.com/uolhost/test-backEnd-Java/master/referencias/liga_da_justica.xml).
+- [API dos vingadores](https://raw.githubusercontent.com/uolhost/test-backEnd-Java/master/referencias/vingadores.json).
+- Lombok.
+- Validation.
+- Ulid Creator.
+- Jackson Dataformat XML.
+- Web Flux.
 
 # Requsições
 
 ## Player
 
-### Registra jogador
+### Registra Jogador
 
 ```json
 /api/players/register-player
@@ -37,13 +44,13 @@ Full stack da aplicação uol host
 }
 ```
 
-### Listar jogador
+### Listar Jogador
 
 ```json
 /api/players/list-player?page=0&size=1&sort=id
 ```
 
-# Execução do projeto
+# Execução Do Projeto
 
 - Copie e execute repositório em uma IDE.
 - Acesse [a docmentação da API](http://localhost:8080/swagger-ui/index.html) ou use outra plataforma para testa a API.
