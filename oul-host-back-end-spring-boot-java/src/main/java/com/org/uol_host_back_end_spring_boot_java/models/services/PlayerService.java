@@ -41,9 +41,13 @@ public class PlayerService implements IPlayerService {
 		return playerMapper.toPlayerResponse(player);
 	}
 
-	public Page<PlayerResponse> listPlayer(Pageable pageable) {
+	public Page<PlayerResponse> listPlayers(Pageable pageable) {
 		return playerRepository
 				.findAllPlayers(pageable)
 				.map(playerMapper::toPlayerResponse);
+	}
+
+	public void deletePlayers() {
+		playerRepository.deleteAllPlayers();
 	}
 }

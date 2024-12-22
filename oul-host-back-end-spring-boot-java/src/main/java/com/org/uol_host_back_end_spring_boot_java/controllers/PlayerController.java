@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,6 @@ public class PlayerController {
 	@Autowired
 	private IPlayerService playerService;
 	
-	
 	@PostMapping("/register-player")
 	public ResponseEntity<PlayerResponse> registerPlayer(@Valid @RequestBody PlayerRequest request) {
 		return ResponseEntity
@@ -31,9 +31,16 @@ public class PlayerController {
 	}
 	
 	@GetMapping("/list-player")
-	public ResponseEntity<Page<PlayerResponse>> listPlayer(Pageable pageable) {	
+	public ResponseEntity<Page<PlayerResponse>> listPlayers(Pageable pageable) {	
 		return ResponseEntity
 				.status(200)
-				.body(playerService.listPlayer(pageable));
+				.body(playerService.listPlayers(pageable));
+	}
+	
+	@DeleteMapping("/delete-players")
+	public ResponseEntity<Void> deletePlayers() {	
+		playerService.deletePlayers();
+		
+		return ResponseEntity.status(200).body(null);
 	}
 }
