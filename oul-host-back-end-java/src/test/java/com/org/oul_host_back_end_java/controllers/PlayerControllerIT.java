@@ -17,10 +17,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.f4b6a3.ulid.UlidCreator;
-import com.org.oul_host_back_end_java.models.dtos.PlayerRequest;
-import com.org.oul_host_back_end_java.models.entities.Player;
-import com.org.oul_host_back_end_java.models.enums.PlayerType;
-import com.org.oul_host_back_end_java.models.repositories.interfaces.IPlayerRepository;
+import com.org.uol_host_back_end_java.models.dtos.PlayerRequest;
+import com.org.uol_host_back_end_java.models.entities.Player;
+import com.org.uol_host_back_end_java.models.enums.PlayerType;
+import com.org.uol_host_back_end_java.models.repositories.interfaces.IPlayerRepository;
 
 @SpringBootTest
 @ActiveProfiles("dev")
