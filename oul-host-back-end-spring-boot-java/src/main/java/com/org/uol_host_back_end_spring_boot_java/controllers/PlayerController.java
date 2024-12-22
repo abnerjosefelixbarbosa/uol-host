@@ -41,6 +41,6 @@ public class PlayerController {
 	public ResponseEntity<Void> deletePlayers() {	
 		playerService.deletePlayers();
 		
-		return ResponseEntity.status(200).body(null);
+		return ResponseEntity.status(204).body(null);
 	}
 }
