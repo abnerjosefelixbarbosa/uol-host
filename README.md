@@ -6,7 +6,12 @@ Full stack da aplicação uol host
 
 ## Modelo
 
-![uol-host-diagram-class drawio](https://github.com/user-attachments/assets/004feb85-63bb-4037-9d57-258d63975aa5)
+![uol-host-diagram-class drawio](https://github.com/user-attachments/assets/004feb85-63bb-4037-9d57-258d63975aa5).
+
+# Fucionalidades
+
+- Registra jogaor.
+- Listar jogadores.
 
 # Recurso Do Projeto 
 
@@ -26,6 +31,7 @@ Full stack da aplicação uol host
 - Ulid Creator.
 - Jackson Dataformat XML.
 - Web Flux.
+- Hibernate/JPA.
 
 # Requsições
 
