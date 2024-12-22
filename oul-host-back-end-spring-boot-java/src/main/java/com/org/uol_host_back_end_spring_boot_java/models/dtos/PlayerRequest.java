@@ -15,16 +15,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlayerRequest {
-	@NotEmpty
-	@NotNull
+	@NotEmpty(message = "name empty")
+	@NotNull(message = "name null")
 	private String name;
-	@NotEmpty
-	@NotNull
-	@Email
+	@NotEmpty(message = "email empty")
+	@NotNull(message = "email null")
+	@Email(message = "email invalid")
 	private String email;
-	@NotNull
+	@NotNull(message = "telephone null")
 	private String telephone;
-	@NotNull
+	@NotNull(message = "player null")
 	@Enumerated(EnumType.STRING)
 	private PlayerType playerType;
 }
