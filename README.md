@@ -12,6 +12,7 @@ Full stack da aplicação uol host
 
 - Registra jogaor.
 - Listar jogadores.
+- Deletar jogadores.
 
 # Recurso Do Projeto 
 
@@ -50,10 +51,16 @@ Full stack da aplicação uol host
 }
 ```
 
-### Listar Jogador
+### Listar Jogadores
 
 ```json
 /api/players/list-player?page=0&size=1&sort=id
+```
+
+### Deletar Jogadores
+
+```json
+/api/players/delete-players
 ```
 
 # Execução Do Projeto
