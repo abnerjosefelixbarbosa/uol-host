@@ -1,6 +1,6 @@
-import { PlayerType } from "./playerType";
+import { PlayerType } from "../enums/player-type";
 
-export interface Player {
+export interface playerResponse {
     id: string;
     name: string;
     email: string;

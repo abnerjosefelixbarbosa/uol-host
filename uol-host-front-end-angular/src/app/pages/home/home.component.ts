@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PlayerType } from '../../models/entities/playerType';
+import { PlayerType } from '../../models/enums/player-type';
 import { Router } from '@angular/router';
 
 @Component({
