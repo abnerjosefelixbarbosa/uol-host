@@ -1,0 +1,65 @@
+
+
+.registration-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.registration-form {
+    padding: 10px;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-style: solid;
+}
+
+.registration-title-form span {
+    font-weight: bold;
+}
+
+.registration-input-form {
+    margin-top: 10px;
+}
+
+.registration-input-form input[type="text"] {
+    margin-left: 5px;
+    width: 75%;
+    padding: 2px;
+}
+
+.registration-input-form input[type="email"] {
+    margin-left: 5px;
+    width: 76%;
+    padding: 2px;
+}
+
+.registration-input-form input[type="tel"] {
+    margin-left: 5px;
+    width: 68%;
+    padding: 2px;
+}
+
+.registration-foot-form {
+    margin-top: 10px;
+}
+
+.registration-groups-form {
+    margin-top: 10px;
+}
+
+.registration-foot-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.registration-foot-form button {
+    padding: 8px 0; 
+    width: 45%;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-style: solid;
+    border-radius: 8px;
+}

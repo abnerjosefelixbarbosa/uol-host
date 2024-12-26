@@ -1,0 +1,42 @@
+<main class="main">
+    <section class="registration-container">
+        <div class="registration-form">
+            <form [formGroup]="form" (ngSubmit)="register()">
+                <div class="registration-title-form">
+                    <span>Cadastro do jogador UOL</span>
+                </div>
+                <div class="registration-body-form">
+                    <div class="registration-input-form">
+                        <label for="">Nome:</label>
+                        <input type="text" formControlName="name">
+                    </div>
+                    <div class="registration-input-form">
+                        <label for="">Email:</label>
+                        <input type="email" formControlName="email">
+                    </div>
+                    <div class="registration-input-form">
+                        <label for="">Telefone:</label>
+                        <input type="tel" formControlName="telephone">
+                    </div>
+                    <div class="registration-input-form">
+                        <span>Quero ser do grupo:</span>
+                        <div class="registration-groups-form">
+                            <div>
+                                <input type="radio" formControlName="group" name="group" value="justice_league">
+                                <span>Liga da Justiça</span>
+                            </div>
+                           <div>
+                                <input type="radio" formControlName="group" name="group" value="avengers">
+                                <span>Os vingadores</span>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="registration-foot-form">
+                    <button type="submit" [disabled]="form.invalid">Cadastrar</button>
+                    <button type="button" (click)="goToPlayersList()">Listar jogadores</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
