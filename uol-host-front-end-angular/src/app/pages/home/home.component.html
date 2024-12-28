@@ -9,10 +9,22 @@
                     <div class="registration-input-form">
                         <label for="">Nome:</label>
                         <input type="text" formControlName="name">
+
+                        @if (errorsName != []) {
+                            @for (item of errorsName; track item.id) {
+                                {{ item.name }}
+                            }
+                        }
                     </div>
                     <div class="registration-input-form">
                         <label for="">Email:</label>
                         <input type="email" formControlName="email">
+
+                        @if (errorsEmail != []) {
+                            @for (item of errorsEmail; track item.id) {
+                                {{ item.name }}
+                            }
+                        }
                     </div>
                     <div class="registration-input-form">
                         <label for="">Telefone:</label>
@@ -30,10 +42,18 @@
                                 <span>Os vingadores</span>
                            </div>
                         </div>
+
+                        @if (errorsEmail != []) {
+                            @for (item of errorsGroup; track item.id) {
+                                <div>
+                                    <span>{{ item.name }}</span>
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
                 <div class="registration-foot-form">
-                    <button type="submit" [disabled]="form.invalid">Cadastrar</button>
+                    <button type="submit">Cadastrar</button>
                     <button type="button" (click)="goToPlayersList()">Listar jogadores</button>
                 </div>
             </form>

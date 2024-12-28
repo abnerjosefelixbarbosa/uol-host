@@ -1,4 +1,4 @@
 export enum PlayerType {
     AVENGERS = "AVENGERS",
-    JUSTICE_LEAGUE = "JUSTICE LEAGUE",
+    JUSTICE_LEAGUE = "JUSTICE_LEAGUE",
 }

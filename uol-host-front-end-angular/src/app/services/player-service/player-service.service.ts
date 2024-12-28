@@ -15,7 +15,6 @@ export interface IPlayerService {
 })
 export class PlayerService implements IPlayerService {
   private url: string = new API().development;
-  private errorMessage: string = '';
   
   constructor(private httpClient: HttpClient) { }
 
@@ -23,9 +22,7 @@ export class PlayerService implements IPlayerService {
     return this.httpClient.post<any>(`${this.url}/api/players/register-player`, request)
     .pipe(
       catchError((err) => {
-        this.errorMessage = err.message;
-
-        return throwError(() => new Error(this.errorMessage));
+        return throwError(() => new Error(err.error.message));
       })
     );    
   }
