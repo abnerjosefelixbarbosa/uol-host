@@ -11,10 +11,10 @@
 	</parent>
 	
 	<groupId>com.org</groupId>
-	<artifactId>oul-host-back-end-java</artifactId>
+	<artifactId>uol-host-back-end-spring-boot-java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>oul-host-back-end-java</name>
-	<description>OUL Host Back End Java</description>
+	<name>uol-host-back-end-spring-boot-java</name>
+	<description>UOL Host Back End Spring Boot Java</description>
 	<url/>
 	
 	<licenses>
