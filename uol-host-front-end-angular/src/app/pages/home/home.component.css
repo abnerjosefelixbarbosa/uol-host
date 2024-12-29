@@ -63,3 +63,11 @@
     border-style: solid;
     border-radius: 8px;
 }
+
+.error-message span {
+    color: red;
+}
+
+.ok-message span {
+    color: green;
+}

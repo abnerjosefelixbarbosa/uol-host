@@ -16,7 +16,7 @@ public class PlayerValidation implements IPlayerValidation {
         boolean isExists = playerRepository.existsPlayerByNameOrEmail(player);
         
         if (isExists) {
-        	throw new RuntimeException("player exists");
+        	throw new RuntimeException("jogador existe");
         }
 	}
 }

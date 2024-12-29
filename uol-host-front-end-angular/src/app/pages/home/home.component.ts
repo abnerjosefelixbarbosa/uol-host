@@ -9,7 +9,7 @@ import { catchError, Observable } from 'rxjs';
 
 interface IErrors {
   id: number,
-  name: string
+  description: string
 }
 
 @Component({
@@ -21,9 +21,8 @@ templateUrl: './home.component.html',
 })
 export class HomeComponent {
   form: FormGroup;
-  errorsName;
-  errorsEmail;
-  errorsGroup;
+  messageErrorRequest: string = '';
+  messageRequest: string = '';
 
   constructor(private formBuilder: FormBuilder, private router: Router, private playerService: PlayerService) {
     this.form = this.formBuilder.group({
@@ -32,10 +31,6 @@ export class HomeComponent {
       telephone: [''],
       group: ['', Validators.required],
     });
-
-    this.errorsName = new Array<IErrors>();
-    this.errorsEmail = new Array<IErrors>();
-    this.errorsGroup = new Array<IErrors>();
   }
 
   registerPlayer() {
@@ -47,9 +42,9 @@ export class HomeComponent {
       playerType = PlayerType.AVENGERS
     }
 
-    this.loadErrors()
+    this.messageErrorRequest = "";
+    this.messageRequest = "";
 
-    /*
     this.playerService.registerPlayer({
       name: this.form.value.name,
       email: this.form.value.email,
@@ -57,69 +52,47 @@ export class HomeComponent {
       playerType: playerType      
     })
     .subscribe({
-      next: (value) => {
-        console.log(value)
+      next: () => {
+        this.messageRequest = "jogador cadastrado"
       },
       error: (err) => {
-        message = err.message;
+        this.messageErrorRequest = err.message;
       }
     });
-    */
   }
 
-  private loadErrors(): void {
-    const name = this.form.get('name');
-    const email = this.form.get('email');
-    const group = this.form.get('group');
+  loadErrorsForm(controleName: string): IErrors[] {
+    const name = this.form.get(controleName);
 
-    if (!name?.invalid) {
-      this.errorsName = [];
+    if (!name || !name.errors) return [];
+
+    const errorsForm = new Array<IErrors>();
+
+    if (name?.errors!['required']) {
+      errorsForm.push({
+        id: 1,
+        description: 'campo obrigatório'
+      })
     }
 
-    if (!email?.invalid) {
-      this.errorsEmail = [];
+    if (name.errors['email']) {
+      errorsForm.push({
+        id: 2,
+        description: 'email invalido'
+      })
     }
 
-    if (!group?.invalid) {
-      this.errorsEmail = [];
+    if (name.errors['maxlength']) {
+      errorsForm.push({
+        id: 3,
+        description: `tamanho máximo ${name.errors['maxlength'].requiredLength} caracteres.`
+      });
     }
 
-    if (name?.errors!['required'] || email?.errors!['required'] || group?.errors!['required']) {
-      this.errorsName.push({id: 1, name: 'nome obrigatório'})
-      this.errorsEmail.push({ id: 1, name: 'email obrigatório' })
-      this.errorsGroup.push({id: 1, name: 'grupo obrigatório'})
-    }
+    return errorsForm;
   }
 
   goToPlayersList() {
     this.router.navigate(['player-list']);
   }
-
-  /*
-  getErrorMessages(controlName: string): string[] {
-    const control = this.form.get(controlName);
-    if (!control || !control.errors) return [];
-
-    const errorMessages: string[] = [];
-
-    if (control.errors['required']) {
-      errorMessages.push({'Este campo é obrigatório.'});
-    }
-    if (control.errors['email']) {
-      errorMessages.push('Insira um email válido.');
-    }
-    if (control.errors['minlength']) {
-      errorMessages.push(
-        `O comprimento mínimo é ${control.errors['minlength'].requiredLength} caracteres.`
-      );
-    }
-    if (control.errors['maxlength']) {
-      errorMessages.push(
-        `O comprimento máximo é ${control.errors['maxlength'].requiredLength} caracteres.`
-      );
-    }
-
-    return errorMessages;
-  }
-  */  
 }

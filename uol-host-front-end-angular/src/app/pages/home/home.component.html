@@ -5,14 +5,25 @@
                 <div class="registration-title-form">
                     <span>Cadastro do jogador UOL</span>
                 </div>
+                @if (messageRequest !== "") {
+                    <div class="ok-message">
+                        <span>{{ messageRequest }}</span>
+                    </div>
+                } @else if (messageErrorRequest !== "") {
+                    <div class="error-message">
+                        <span>{{ messageErrorRequest }}</span>
+                    </div>
+                }
                 <div class="registration-body-form">
                     <div class="registration-input-form">
                         <label for="">Nome:</label>
                         <input type="text" formControlName="name">
 
-                        @if (errorsName != []) {
-                            @for (item of errorsName; track item.id) {
-                                {{ item.name }}
+                        @if (form.get('name')?.errors || form.get('name')?.touched) {
+                            @for (item of loadErrorsForm('name'); track item.id) {
+                                <div class="error-message">
+                                    <span> {{ item.description }}</span>
+                                </div>
                             }
                         }
                     </div>
@@ -20,9 +31,11 @@
                         <label for="">Email:</label>
                         <input type="email" formControlName="email">
 
-                        @if (errorsEmail != []) {
-                            @for (item of errorsEmail; track item.id) {
-                                {{ item.name }}
+                        @if (form.get('email')?.errors || form.get('email')?.touched) {
+                            @for (item of loadErrorsForm('email'); track item.id) {
+                                <div class="error-message">
+                                    <span> {{ item.description }}</span>
+                                </div>
                             }
                         }
                     </div>
@@ -43,10 +56,10 @@
                            </div>
                         </div>
 
-                        @if (errorsEmail != []) {
-                            @for (item of errorsGroup; track item.id) {
-                                <div>
-                                    <span>{{ item.name }}</span>
+                        @if (form.get('group')?.errors || form.get('group')?.touched) {
+                            @for (item of loadErrorsForm('group'); track item.id) {
+                                <div class="error-message">
+                                    <span> {{ item.description }}</span>
                                 </div>
                             }
                         }
