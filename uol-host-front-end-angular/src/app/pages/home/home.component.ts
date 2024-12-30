@@ -53,7 +53,7 @@ export class HomeComponent {
     })
     .subscribe({
       next: () => {
-        this.messageRequest = "jogador cadastrado"
+        this.messageRequest = "cadastrado com sucesso"
       },
       error: (err) => {
         this.messageErrorRequest = err.message;
