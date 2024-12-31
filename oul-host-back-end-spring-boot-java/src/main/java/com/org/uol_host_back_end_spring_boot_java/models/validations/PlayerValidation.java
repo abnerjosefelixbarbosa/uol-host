@@ -19,4 +19,12 @@ public class PlayerValidation implements IPlayerValidation {
         	throw new RuntimeException("jogador existe");
         }
 	}
+	
+	public void playerValidation(String id) {
+        boolean isExists = playerRepository.existsPlayerById(id);
+        
+        if (!isExists) {
+        	throw new RuntimeException("jogador não existe");
+        }
+	}
 }

@@ -10,6 +10,10 @@ public interface IPlayerRepository {
 	
 	boolean existsPlayerByNameOrEmail(Player player);
 	
+	boolean existsPlayerById(String id);
+	
+	void deletePlayerById(String id);
+	
 	void deleteAllPlayers();
 	
 	Page<Player> findAllPlayers(Pageable pageable);

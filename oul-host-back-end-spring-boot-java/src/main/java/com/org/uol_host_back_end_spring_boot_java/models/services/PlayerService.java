@@ -47,7 +47,9 @@ public class PlayerService implements IPlayerService {
 				.map(playerMapper::toPlayerResponse);
 	}
 
-	public void deletePlayers() {
-		playerRepository.deleteAllPlayers();
+	public void deletePlayerById(String id) {
+		playerValidation.playerValidation(id);
+		
+		playerRepository.deletePlayerById(id);
 	}
 }

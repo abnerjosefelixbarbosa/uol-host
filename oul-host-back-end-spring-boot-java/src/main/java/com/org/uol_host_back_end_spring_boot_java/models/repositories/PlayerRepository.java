@@ -63,8 +63,7 @@ public class PlayerRepository implements IPlayerRepository {
 		
 		query.setParameter("email", player.getEmail());
 		
-		List<Object> objects = query
-				.getResultList();
+		List<Object> objects = query.getResultList();
 		
 		if (!objects.isEmpty()) {
 			return true;
@@ -74,10 +73,12 @@ public class PlayerRepository implements IPlayerRepository {
 	}
 
 	@Transactional
-	public void deleteAllPlayers() {
-		String sql = "DELETE FROM players";
+	public void deletePlayerById(String id) {
+		String sql = "DELETE FROM players AS player WHERE player.id = :id";
 		
 		Query query = entityManager.createNativeQuery(sql);
+		
+		query.setParameter("id", id);
 		
 		query.executeUpdate();
 	}
@@ -104,5 +105,30 @@ public class PlayerRepository implements IPlayerRepository {
         List<Player> subList = players.subList(start, end);
         
 		return new PageImpl<Player>(subList, pageable, players.size());
+	}
+
+	@Transactional
+	public void deleteAllPlayers() {
+        String sql = "DELETE FROM players";
+		
+		Query query = entityManager.createNativeQuery(sql);
+		
+		query.executeUpdate();
+	}
+
+	public boolean existsPlayerById(String id) {
+		String sql = "SELECT * FROM players AS player WHERE player.id = :id";	
+	
+	Query query = entityManager.createNativeQuery(sql, Object.class);
+	
+	query.setParameter("id", id);
+	
+	List<Object> objects = query.getResultList();
+	
+	if (!objects.isEmpty()) {
+		return true;
+	}
+		
+		return false;
 	}
 }

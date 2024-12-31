@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.org.uol_host_back_end_spring_boot_java.models.dtos.PlayerRequest;
@@ -37,9 +38,9 @@ public class PlayerController {
 				.body(playerService.listPlayers(pageable));
 	}
 	
-	@DeleteMapping("/delete-players")
-	public ResponseEntity<Void> deletePlayers() {	
-		playerService.deletePlayers();
+	@DeleteMapping("/delete-player-by-id")
+	public ResponseEntity<Void> deletePlayerById(@RequestParam String id) {	
+		playerService.deletePlayerById(id);
 		
 		return ResponseEntity.status(204).body(null);
 	}

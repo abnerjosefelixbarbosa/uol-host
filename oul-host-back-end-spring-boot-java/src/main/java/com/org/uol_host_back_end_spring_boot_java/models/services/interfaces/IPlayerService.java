@@ -11,5 +11,5 @@ public interface IPlayerService {
 	
 	Page<PlayerResponse> listPlayers(Pageable pageable);
 	
-	void deletePlayers();
+	void deletePlayerById(String id);
 }

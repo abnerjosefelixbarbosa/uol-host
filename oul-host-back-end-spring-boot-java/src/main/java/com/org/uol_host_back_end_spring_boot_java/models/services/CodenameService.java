@@ -34,18 +34,18 @@ public class CodenameService implements ICodenameService {
 			
 		if (player.getPlayerType().getType() == "AVENGERS") {
 			PlayerCodenameAvengersResponse codename = avengersList.parallelStream().findFirst()
-					.orElseThrow(() -> new EntityNotFoundException("codename not found"));
+					.orElseThrow(() -> new EntityNotFoundException("codenome não encontrado"));
 			
 			avengersList.remove(codename);
 			
 			player.setCodename(codename.getCodename());
 		} else {
 			PlayerCodenameJusticeLeagueResponse codename = justiceLeagueList.stream().findFirst()
-					.orElseThrow(() -> new EntityNotFoundException("codename not found"));
+					.orElseThrow(() -> new EntityNotFoundException("codenome não encontrado"));
 			
 			justiceLeagueList.remove(codename);
 			
-			player.setCodename(justiceLeagueList.stream().findFirst().get().getCodename());
+			player.setCodename(codename.getCodename());
 		}
 		
 		return player;
