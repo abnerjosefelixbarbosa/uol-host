@@ -1,6 +1,7 @@
 package com.org.uol_host_back_end_spring_boot_java.models.repositories;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.org.uol_host_back_end_spring_boot_java.models.mappers.interfaces.IPla
 import com.org.uol_host_back_end_spring_boot_java.models.repositories.interfaces.IPlayerRepository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
@@ -109,6 +111,20 @@ public class PlayerRepository implements IPlayerRepository {
 		query.executeUpdate();
 	}
 
+	public Player findPlayersById(String id) {
+		String sql = "SELECT * FROM players AS player WHERE player.id = :id";	
+	
+	    Query query = entityManager.createNativeQuery(sql, Object.class);
+	
+	    query.setParameter("id", id);
+	
+	    Optional<Player> player = (Optional<Player>) query.getResultList().parallelStream().map(playerMapper::toPlayer).findFirst();
+	    
+	    return player.orElseThrow(() -> {
+	    	throw new EntityNotFoundException("jogador não encontrado");
+	    });
+	}
+	
 	public boolean existsPlayerById(String id) {
 		String sql = "SELECT * FROM players AS player WHERE player.id = :id";	
 	
@@ -140,6 +156,8 @@ public class PlayerRepository implements IPlayerRepository {
 		query.setParameter("id", player.getId());
 		
 		query.executeUpdate();
+		
+		player.setId(id);
 		
 		return player;
 	}

@@ -19,4 +19,6 @@ public interface IPlayerRepository {
 	Page<Player> findAllPlayers(Pageable pageable);
 	
 	Player editPlayer(String id, Player player);
+	
+	Player findPlayersById(String id);
 }

@@ -2,6 +2,7 @@ package com.org.uol_host_back_end_spring_boot_java.models.services;
 
 
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,13 +57,21 @@ public class PlayerService implements IPlayerService {
 	}
 
 	public PlayerResponse editPlayer(String id, PlayerRequest request) {
-		playerValidation.playerValidation(id);
-		
-		Player player = playerMapper.toPlayer(request);
+		Player player = new Player();
+				
+		player = playerMapper.toPlayer(request);
 		
 		playerValidation.playerValidation(player);
 		
-		player = playerRepository.editPlayer(id, player);
+		Player playerFound = playerRepository.findPlayersById(id);
+		
+		
+		
+		BeanUtils.copyProperties(player, playerFound);
+		
+		System.out.println(playerFound.toString());
+		
+		player = playerRepository.editPlayer(id, playerFound);
 		
 		PlayerResponse response = playerMapper.toPlayerResponse(player);
 		
