@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,9 +40,23 @@ public class PlayerController {
 	@Operation(summary = "registrar jogador", description = "registra um jogador")
 	@PostMapping(value = "/register-player", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PlayerResponse> registerPlayer(@Valid @RequestBody PlayerRequest request) {
-		return ResponseEntity
-				.status(201)
-				.body(playerService.registerPlayer(request));
+		PlayerResponse response = playerService.registerPlayer(request);
+		
+		return ResponseEntity.status(201).body(response);
+	}
+	
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "retorna um jogador"),
+			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição"),
+			@ApiResponse(responseCode = "500", description = "retorna um erro do servidor"),
+	})
+	@ResponseStatus(value = HttpStatus.OK)
+	@Operation(summary = "editar jogador", description = "registra um jogador")
+	@PutMapping(value = "/edit-player", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PlayerResponse> editPlayer(@RequestParam String id, @Valid @RequestBody PlayerRequest request) {
+		PlayerResponse response = playerService.editPlayer(id, request);
+		
+		return ResponseEntity.status(200).body(response);
 	}
 	
 	@ApiResponses(value = {
@@ -53,9 +68,9 @@ public class PlayerController {
 	@Operation(summary = "listar jogador", description = "lista todos os jogadores")
 	@GetMapping(value = "/list-player", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Page<PlayerResponse>> listPlayers(Pageable pageable) {	
-		return ResponseEntity
-				.status(200)
-				.body(playerService.listPlayers(pageable));
+		Page<PlayerResponse> page = playerService.listPlayers(pageable);
+		
+		return ResponseEntity.status(200).body(page);
 	}
 	
 	@ApiResponses(value = {

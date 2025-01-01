@@ -17,4 +17,6 @@ public interface IPlayerRepository {
 	void deleteAllPlayers();
 	
 	Page<Player> findAllPlayers(Pageable pageable);
+	
+	Player editPlayer(String id, Player player);
 }

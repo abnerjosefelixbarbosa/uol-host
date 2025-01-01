@@ -9,6 +9,8 @@ import com.org.uol_host_back_end_spring_boot_java.models.dtos.PlayerResponse;
 public interface IPlayerService {
 	PlayerResponse registerPlayer(PlayerRequest request);
 	
+	PlayerResponse editPlayer(String id, PlayerRequest request);
+	
 	Page<PlayerResponse> listPlayers(Pageable pageable);
 	
 	void deletePlayerById(String id);

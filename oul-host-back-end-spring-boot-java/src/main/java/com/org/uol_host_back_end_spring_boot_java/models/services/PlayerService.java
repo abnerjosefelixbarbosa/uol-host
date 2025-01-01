@@ -38,18 +38,34 @@ public class PlayerService implements IPlayerService {
 		
 		player = playerRepository.insertPlayer(player);
 		
-		return playerMapper.toPlayerResponse(player);
+		PlayerResponse response = playerMapper.toPlayerResponse(player);
+		
+		return response;
 	}
 
 	public Page<PlayerResponse> listPlayers(Pageable pageable) {
-		return playerRepository
-				.findAllPlayers(pageable)
-				.map(playerMapper::toPlayerResponse);
+		Page<PlayerResponse> page = playerRepository.findAllPlayers(pageable).map(playerMapper::toPlayerResponse);
+		
+		return page;
 	}
 
 	public void deletePlayerById(String id) {
 		playerValidation.playerValidation(id);
 		
 		playerRepository.deletePlayerById(id);
+	}
+
+	public PlayerResponse editPlayer(String id, PlayerRequest request) {
+		playerValidation.playerValidation(id);
+		
+		Player player = playerMapper.toPlayer(request);
+		
+		playerValidation.playerValidation(player);
+		
+		player = playerRepository.editPlayer(id, player);
+		
+		PlayerResponse response = playerMapper.toPlayerResponse(player);
+		
+		return response;
 	}
 }

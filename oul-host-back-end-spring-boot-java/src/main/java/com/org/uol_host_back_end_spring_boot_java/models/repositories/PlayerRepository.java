@@ -30,8 +30,7 @@ public class PlayerRepository implements IPlayerRepository {
 	public Player insertPlayer(Player player) {
 		player.setId(UlidCreator.getUlid().toString());
 
-		String sql = "INSERT INTO players (id, name, email, telephone, player_type, codename) " +
-		             "VALUES (:id, :name, :email, :telephone, :player_type, :codename)";
+		String sql = "INSERT INTO players (id, name, email, telephone, player_type, codename) VALUES (:id, :name, :email, :telephone, :player_type, :codename)";
 
 		Query query = entityManager.createNativeQuery(sql);
 		
@@ -53,9 +52,7 @@ public class PlayerRepository implements IPlayerRepository {
 	}
 
 	public boolean existsPlayerByNameOrEmail(Player player) {
-		String sql = "SELECT * FROM players AS player " +
-	                 "WHERE player.name = :name " +
-	                 "OR player.email = :email";	
+		String sql = "SELECT * FROM players AS player WHERE player.name = :name OR player.email = :email";	
 		
 		Query query = entityManager.createNativeQuery(sql, Object.class);
 		
@@ -88,11 +85,7 @@ public class PlayerRepository implements IPlayerRepository {
 		
 		Query query = entityManager.createNativeQuery(sql);
 		
-		List<Player> players = (List<Player>) query
-				.getResultList()
-				.stream()
-				.map(playerMapper::toPlayer)
-				.collect(Collectors.toList());
+		List<Player> players = (List<Player>) query.getResultList().stream().map(playerMapper::toPlayer).collect(Collectors.toList());
 		
 		int start = (int) pageable.getOffset();
 		
@@ -119,16 +112,35 @@ public class PlayerRepository implements IPlayerRepository {
 	public boolean existsPlayerById(String id) {
 		String sql = "SELECT * FROM players AS player WHERE player.id = :id";	
 	
-	Query query = entityManager.createNativeQuery(sql, Object.class);
+	    Query query = entityManager.createNativeQuery(sql, Object.class);
 	
-	query.setParameter("id", id);
+	    query.setParameter("id", id);
 	
-	List<Object> objects = query.getResultList();
+	    List<Object> objects = query.getResultList();
 	
-	if (!objects.isEmpty()) {
-		return true;
-	}
+	    if (!objects.isEmpty()) {
+	    	return true;
+	    }
 		
 		return false;
+	}
+
+	@Transactional
+	public Player editPlayer(String id, Player player) {
+		String sql = "UPDATE players AS player SET player.name = :name, player.email = :email, player.telephone = :telephone  WHERE player.id = :id";
+		
+		Query query = entityManager.createNativeQuery(sql);
+		
+		query.setParameter("name", player.getName());
+		
+		query.setParameter("email", player.getEmail());
+		
+		query.setParameter("telephone", player.getTelephone());
+		
+		query.setParameter("id", player.getId());
+		
+		query.executeUpdate();
+		
+		return player;
 	}
 }
