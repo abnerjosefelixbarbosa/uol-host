@@ -2,7 +2,9 @@
 
 ## Sobre
 
-Esta aplicação foi desenvolvida para a área de lazer da empresa onde a aplicação permite gerar codinome para menbros da equipe do setor.   
+Esta aplicação foi desenvolvida para a área de lazer da empresa onde a aplicação permite gerar codinome para menbros da equipe do setor.
+
+[Link do desavio](https://github.com/uolhost/test-backEnd-Java)
 
 ## Modelo
 
@@ -56,10 +58,23 @@ Esta aplicação foi desenvolvida para a área de lazer da empresa onde a aplica
 /api/players/list-player?page=0&size=1&sort=id
 ```
 
-### Deletar Jogadores
+### Deletar Jogador por id
 
 ```json
-/api/players/delete-players
+/api/players/delete-player-by-id?id=1
+```
+
+### Editar Jogador
+
+```json
+/api/players/edit-player?id=1
+
+{
+  "name": "",
+  "email": "",
+  "telephone": "",
+  "playerType": "AVENGERS"
+}
 ```
 
 # Execução Do Projeto
