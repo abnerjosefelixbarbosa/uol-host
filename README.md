@@ -2,7 +2,7 @@
 
 ## Sobre
 
-Full stack da aplicação uol host  
+Esta aplicação foi desenvolvida para a área de lazer da empresa onde a aplicação permite gerar codinome para menbros da equipe do setor.   
 
 ## Modelo
 
@@ -10,7 +10,8 @@ Full stack da aplicação uol host
 
 - Registra jogaor.
 - Listar jogadores.
-- Deletar jogadores.
+- Deletar jogador pelo id.
+- Editar jogador.
 
 # Recurso Do Projeto 
 
