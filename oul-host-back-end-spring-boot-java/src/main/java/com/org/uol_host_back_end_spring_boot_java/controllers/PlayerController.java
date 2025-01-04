@@ -33,8 +33,7 @@ public class PlayerController {
 	
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "201", description = "cria um jogador"),
-			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição"),
-			@ApiResponse(responseCode = "500", description = "retorna um erro do servidor"),
+			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição")
 	})
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@Operation(summary = "registrar jogador", description = "registra um jogador")
@@ -48,7 +47,6 @@ public class PlayerController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "retorna um jogador"),
 			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição"),
-			@ApiResponse(responseCode = "500", description = "retorna um erro do servidor"),
 	})
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "editar jogador", description = "registra um jogador")
@@ -62,7 +60,6 @@ public class PlayerController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "retorna uma pagina de jogador"),
 			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição"),
-			@ApiResponse(responseCode = "500", description = "retorna um erro do servidor"),
 	})
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "listar jogador", description = "lista todos os jogadores")
@@ -76,7 +73,6 @@ public class PlayerController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "204", description = "não retorna nem um conteudo"),
 			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição"),
-			@ApiResponse(responseCode = "500", description = "retorna um erro do servidor"),
 	})
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	@Operation(summary = "deletar jogador", description = "deleta um jogador pelo id")
