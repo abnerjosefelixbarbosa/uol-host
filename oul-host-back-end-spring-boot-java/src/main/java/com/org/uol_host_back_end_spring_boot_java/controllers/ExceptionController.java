@@ -50,8 +50,8 @@ public class ExceptionController {
 		response.setLocalDateTime(LocalDateTime.now());
 		response.setMessage(ex.getMessage());
 		response.setPath(request.getRequestURI());
-		response.setStatus(400);
+		response.setStatus(404);
 		
-        return ResponseEntity.status(400).body(response);
+        return ResponseEntity.status(404).body(response);
     }
 }

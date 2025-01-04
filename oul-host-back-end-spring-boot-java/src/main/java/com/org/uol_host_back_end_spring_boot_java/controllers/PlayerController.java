@@ -33,7 +33,8 @@ public class PlayerController {
 	
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "201", description = "cria um jogador"),
-			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição")
+			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição"),
+			@ApiResponse(responseCode = "404", description = "retorna um erro de não encontrado"),
 	})
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@Operation(summary = "registrar jogador", description = "registra um jogador")
@@ -47,6 +48,7 @@ public class PlayerController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "retorna um jogador"),
 			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição"),
+			@ApiResponse(responseCode = "404", description = "retorna um erro de não encontrado"),
 	})
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "editar jogador", description = "registra um jogador")
@@ -60,10 +62,11 @@ public class PlayerController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "retorna uma pagina de jogador"),
 			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição"),
+			@ApiResponse(responseCode = "404", description = "retorna um erro de não encontrado"),
 	})
 	@ResponseStatus(value = HttpStatus.OK)
-	@Operation(summary = "listar jogador", description = "lista todos os jogadores")
-	@GetMapping(value = "/list-player", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "listar jogadores", description = "lista todos os jogadores")
+	@GetMapping(value = "/list-players", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Page<PlayerResponse>> listPlayers(Pageable pageable) {	
 		Page<PlayerResponse> page = playerService.listPlayers(pageable);
 		
@@ -73,10 +76,11 @@ public class PlayerController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "204", description = "não retorna nem um conteudo"),
 			@ApiResponse(responseCode = "400", description = "retorna um erro de requesição"),
+			@ApiResponse(responseCode = "404", description = "retorna um erro de não encontrado"),
 	})
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	@Operation(summary = "deletar jogador", description = "deleta um jogador pelo id")
-	@DeleteMapping(value = "/delete-player-by-id", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value = "/delete-player-by-id", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> deletePlayerById(@RequestParam String id) {	
 		playerService.deletePlayerById(id);
 		
