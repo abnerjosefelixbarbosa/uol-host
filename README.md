@@ -4,7 +4,7 @@
 
 Cadastro de jogadores do UOL.
 
-[Link do desavio](https://github.com/uolhost/test-backEnd-Java)
+[Link do desavio](https://github.com/uolhost/test-backEnd-Java).
 
 ## Modelo
 
