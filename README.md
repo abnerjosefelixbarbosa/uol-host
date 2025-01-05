@@ -23,7 +23,7 @@ Cadastro de jogadores do UOL.
 - Spring Boot.
 - MVC.
 - SOLID.
-- Swegger.
+- Swagger.
 - H2 SQL.
 - JUnit 5.
 - [API da liga da justiça](https://raw.githubusercontent.com/uolhost/test-backEnd-Java/master/referencias/liga_da_justica.xml).
