@@ -2,7 +2,7 @@
 
 ## Sobre
 
-Esta aplicação foi desenvolvida para a área de lazer da empresa onde a aplicação permite gerar codinome para menbros da equipe do setor.
+Cadastro de jogadores do UOL.
 
 [Link do desavio](https://github.com/uolhost/test-backEnd-Java)
 
