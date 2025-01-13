@@ -37,7 +37,7 @@ Cadastro de jogadores do UOL.
 
 # Requsições
 
-## Player
+## Jogador
 
 ### Registra Jogador
 
