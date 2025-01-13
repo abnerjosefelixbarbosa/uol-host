@@ -10,7 +10,7 @@ Cadastro de jogadores do UOL.
 
 # Fucionalidades
 
-- Registra jogaor.
+- Registra jogador.
 - Listar jogadores.
 - Deletar jogador pelo id.
 - Editar jogador.
@@ -42,6 +42,7 @@ Cadastro de jogadores do UOL.
 ### Registra Jogador
 
 ```json
+POST
 /api/players/register-player
 
 {
@@ -55,18 +56,21 @@ Cadastro de jogadores do UOL.
 ### Listar Jogadores
 
 ```json
+GET
 /api/players/list-player?page=0&size=1&sort=id
 ```
 
 ### Deletar Jogador por id
 
 ```json
+DELETE
 /api/players/delete-player-by-id?id=1
 ```
 
 ### Editar Jogador
 
 ```json
+PUT
 /api/players/edit-player?id=1
 
 {
