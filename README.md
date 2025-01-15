@@ -6,7 +6,15 @@ Cadastro de jogadores do UOL.
 
 [Link do desavio](https://github.com/uolhost/test-backEnd-Java).
 
-## Modelo
+## Modelo - Diagrama De Classe
+
+### Entidades
+
+![class-diagram-entities](https://github.com/user-attachments/assets/5631ff00-59a3-40e3-8997-b6d6032fe4eb)
+
+### Enumeração
+
+![class-diagram-enums](https://github.com/user-attachments/assets/ec26ce65-b828-40a8-8365-2838273ddcf9)
 
 # Fucionalidades
 
