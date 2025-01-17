@@ -1,4 +1,4 @@
-# uol-host-full-stack
+# uol-host
 
 ## Sobre
 
@@ -14,7 +14,7 @@ Cadastro de jogadores do UOL.
 
 ### Enumerações
 
-![class-diagram-enums](https://github.com/user-attachments/assets/ec26ce65-b828-40a8-8365-2838273ddcf9)
+![class-diagram-enums](https://github.com/user-attachments/assets/fb3cbf77-77ba-4e72-bacf-bfe6eb9a2eb3)
 
 # Fucionalidades
 
