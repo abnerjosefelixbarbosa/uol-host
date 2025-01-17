@@ -12,7 +12,7 @@ Cadastro de jogadores do UOL.
 
 ![class-diagram-entities](https://github.com/user-attachments/assets/5631ff00-59a3-40e3-8997-b6d6032fe4eb)
 
-### Enumeração
+### Enumerações
 
 ![class-diagram-enums](https://github.com/user-attachments/assets/ec26ce65-b828-40a8-8365-2838273ddcf9)
 
